@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/nav_graph">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/plansListFragment">
 
+    <fragment
+        android:id="@+id/plansListFragment"
+        android:name="com.example.giftplanner.ui.planslist.PlansListFragment"
+        android:label="PlansListFragment"
+        tools:layout="@layout/plans_list_fragment"/>
+    <fragment
+        android:id="@+id/presentsListFragment"
+        android:name="com.example.giftplanner.ui.presentslist.PresentsListFragment"
+        android:label="PresentsListFragment"
+        tools:layout="@layout/presents_list_fragment"/>
+    <fragment
+        android:id="@+id/recipientsListFragment"
+        android:name="com.example.giftplanner.ui.recipientslist.RecipientsListFragment"
+        android:label="RecipientsListFragment"
+        tools:layout="@layout/recipients_list_fragment"/>
 </navigation>

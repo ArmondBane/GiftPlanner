@@ -4,12 +4,19 @@ import android.os.Build
 import android.os.Parcelable
 import androidx.annotation.RequiresApi
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
-@Entity(tableName = "plans")
+@Entity (
+    tableName = "plans",
+    foreignKeys = [
+        ForeignKey(entity = Present::class, parentColumns = ["id"], childColumns = ["present_id"]),
+        ForeignKey(entity = Recipient::class, parentColumns = ["id"], childColumns = ["recipient_id"])
+    ]
+)
 @Parcelize
 data class Plan (
     @PrimaryKey(autoGenerate = true) val id: Int = 0,

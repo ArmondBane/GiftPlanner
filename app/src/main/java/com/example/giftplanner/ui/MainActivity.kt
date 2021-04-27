@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.recipientListFragment, R.id.plansListFragment, R.id.presentsListFragment)
+            setOf(R.id.recipientListMenu, R.id.plansListMenu, R.id.presentsListMenu)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)

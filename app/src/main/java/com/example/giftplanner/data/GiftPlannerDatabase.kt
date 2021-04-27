@@ -14,6 +14,8 @@ import com.example.giftplanner.data.dao.RecipientDao
 import com.example.giftplanner.di.ApplicationScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
+import java.time.ZoneId
 import javax.inject.Inject
 import javax.inject.Provider
 
@@ -38,7 +40,105 @@ abstract class GiftPlannerDatabase : RoomDatabase() {
             val recipientDao = database.get().recipientDao()
 
             applicationScope.launch {
-
+                recipientDao.insert(
+                    Recipient(
+                        name = "Папа"
+                    ))
+                recipientDao.insert(
+                    Recipient(
+                        name = "Мама"
+                    ))
+                recipientDao.insert(
+                    Recipient(
+                        name = "Сестра"
+                    ))
+                recipientDao.insert(
+                    Recipient(
+                        name = "Парень"
+                    ))
+                recipientDao.insert(
+                    Recipient(
+                        name = "Бабушка"
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Бритва",
+                        cost = 800.0
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Косметика",
+                        cost = 1500.0
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Сковорода",
+                        cost = 1000.0
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Цепочка",
+                        cost = 2000.0
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Компьютерная игра",
+                        cost = 1799.99
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Кухонный нож",
+                        cost = 3500.0
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Мультиварка",
+                        cost = 4500.0
+                    ))
+                presentDao.insert(
+                    Present(
+                        name = "Телефон",
+                        cost = 10000.0
+                    ))
+                planDao.insert(
+                    Plan(
+                        date = LocalDateTime.of(
+                            2021,
+                            5,
+                            3,
+                            0,
+                            0,
+                            0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                        holidayName = "День рождение мамы",
+                        recipient_id = 2,
+                        present_id = 2
+                    ))
+                planDao.insert(
+                    Plan(
+                        date = LocalDateTime.of(
+                            2021,
+                            6,
+                            12,
+                            0,
+                            0,
+                            0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                        holidayName = "День России",
+                        recipient_id = 1,
+                        present_id = 1
+                    ))
+                planDao.insert(
+                    Plan(
+                        date = LocalDateTime.of(
+                            2021,
+                            9,
+                            1,
+                            0,
+                            0,
+                            0).atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                        holidayName = "Первое сентября",
+                        recipient_id = 3,
+                        present_id = 8
+                    ))
             }
         }
     }
