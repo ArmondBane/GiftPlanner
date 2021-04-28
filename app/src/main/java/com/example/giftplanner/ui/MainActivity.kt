@@ -1,5 +1,6 @@
 package com.example.giftplanner.ui
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -40,3 +41,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 }
+
+const val ADD_PLAN_RESULT_OK = Activity.RESULT_FIRST_USER + 1
+const val EDIT_PLAN_RESULT_OK = Activity.RESULT_FIRST_USER + 2
+const val ADD_PRESENT_RESULT_OK = Activity.RESULT_FIRST_USER + 3
+const val EDIT_PRESENT_RESULT_OK = Activity.RESULT_FIRST_USER + 4
+const val ADD_RECIPIENT_RESULT_OK = Activity.RESULT_FIRST_USER + 5
+const val EDIT_RECIPIENT_RESULT_OK = Activity.RESULT_FIRST_USER + 6

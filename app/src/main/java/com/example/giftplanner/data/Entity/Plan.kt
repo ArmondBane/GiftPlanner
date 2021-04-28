@@ -26,19 +26,23 @@ data class Plan (
     val present_id: Int = 0
 ) : Parcelable {
     val dateFormatted: String
-        @RequiresApi(Build.VERSION_CODES.O) get() = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(
+        @RequiresApi(Build.VERSION_CODES.O)
+        get() = SimpleDateFormat("dd MMMM yyyy", Locale.getDefault()).format(
             Date(date)
         )
     val dateFormattedAsYear: String
-        @RequiresApi(Build.VERSION_CODES.O) get() = SimpleDateFormat("yyyy", Locale.getDefault()).format(
+        @RequiresApi(Build.VERSION_CODES.O)
+        get() = SimpleDateFormat("yyyy", Locale.getDefault()).format(
             Date(date)
         )
     val dateFormattedAsMonth: String
-        @RequiresApi(Build.VERSION_CODES.O) get() = SimpleDateFormat("MM", Locale.getDefault()).format(
+        @RequiresApi(Build.VERSION_CODES.O)
+        get() = SimpleDateFormat("MM", Locale.getDefault()).format(
             Date(date)
         )
     val dateFormattedAsDay: String
-        @RequiresApi(Build.VERSION_CODES.O) get() = SimpleDateFormat("dd", Locale.getDefault()).format(
+        @RequiresApi(Build.VERSION_CODES.O)
+        get() = SimpleDateFormat("dd", Locale.getDefault()).format(
             Date(date)
         )
 }
