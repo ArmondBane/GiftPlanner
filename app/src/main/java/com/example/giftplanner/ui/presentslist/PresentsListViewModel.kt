@@ -7,6 +7,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.giftplanner.data.Entity.Plan
 import com.example.giftplanner.data.Entity.Present
 import com.example.giftplanner.data.dao.PresentDao
+import com.example.giftplanner.ui.*
+import com.example.giftplanner.ui.DELETE_PLAN_RESULT_OK
+import com.example.giftplanner.ui.EDIT_PLAN_RESULT_OK
 import com.example.giftplanner.ui.planslist.PlansListViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -29,8 +32,21 @@ class PresentsListViewModel @ViewModelInject constructor(
         eventChannel.send(Event.NavigateToAddPresent)
     }
 
+    private fun showEditConfirmationMessage(text: String) = viewModelScope.launch {
+        eventChannel.send(Event.ShowEditConfirmationMessage(text))
+    }
+
+    fun onAddEditResult(result: Int) {
+        when (result) {
+            ADD_PRESENT_RESULT_OK -> showEditConfirmationMessage("Подарок успешно добавлен")
+            EDIT_PRESENT_RESULT_OK -> showEditConfirmationMessage("Подарок успешно обновлен")
+            DELETE_PRESENT_RESULT_OK -> showEditConfirmationMessage("Подарок успешно удален")
+        }
+    }
+
     sealed class Event {
         object NavigateToAddPresent : Event()
         data class NavigateToEditPresent(val present: Present) : Event()
+        data class ShowEditConfirmationMessage(val msg: String) : Event()
     }
 }

@@ -3,6 +3,7 @@ package com.example.giftplanner.ui.recipientslist
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.giftplanner.R
@@ -10,6 +11,7 @@ import com.example.giftplanner.data.Entity.Recipient
 import com.example.giftplanner.databinding.RecipientsListFragmentBinding
 import com.example.giftplanner.util.NpaLinerLayoutManager
 import com.example.giftplanner.util.exhaustive
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -38,6 +40,11 @@ class RecipientsListFragment
             }
         }
 
+        setFragmentResultListener("add_edit_request") { _, bundle ->
+            val result = bundle.getInt("add_edit_result")
+            viewModel.onAddEditResult(result)
+        }
+
         viewModel.data.observe(viewLifecycleOwner) {
             recipientsListAdapter.setData(it)
         }
@@ -50,6 +57,9 @@ class RecipientsListFragment
                     }
                     is RecipientsListViewModel.Event.NavigateToEditRecipient -> {
 
+                    }
+                    is RecipientsListViewModel.Event.ShowEditConfirmationMessage -> {
+                        Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()
                     }
                 }.exhaustive
             }

@@ -11,6 +11,7 @@ import com.example.giftplanner.data.dao.PlanDao
 import com.example.giftplanner.data.dao.PresentDao
 import com.example.giftplanner.data.dao.RecipientDao
 import com.example.giftplanner.ui.ADD_PLAN_RESULT_OK
+import com.example.giftplanner.ui.DELETE_PLAN_RESULT_OK
 import com.example.giftplanner.ui.EDIT_PLAN_RESULT_OK
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.Channel
@@ -28,7 +29,10 @@ class AddEditPlanViewModel @ViewModelInject constructor(
     @Assisted private val state: SavedStateHandle,
 ) : ViewModel()  {
 
+
     private val plan = state.get<Plan>("plan")
+
+    val isDeleteAllow: Boolean = plan != null
 
     @ExperimentalCoroutinesApi
     val presentList = presentDao.getAllPresents().flatMapLatest { presentList ->
@@ -102,7 +106,7 @@ class AddEditPlanViewModel @ViewModelInject constructor(
                 recipient_id = recipientId
             )
 
-            updateMoment(updatePlan)
+            updatePlan(updatePlan)
 
         } else {
 
@@ -113,22 +117,31 @@ class AddEditPlanViewModel @ViewModelInject constructor(
                 recipient_id = recipientId
             )
 
-            createMoment(newPlan)
+            createPlan(newPlan)
         }
+    }
+
+    fun onDeleteMenuClick() {
+        deletePlan(plan!!)
     }
 
     private fun showInvalidInputMessage(text: String) = viewModelScope.launch {
         eventChannel.send(Event.ShowInvalidInputMessage(text))
     }
 
-    private fun updateMoment(plan: Plan) = viewModelScope.launch {
+    private fun updatePlan(plan: Plan) = viewModelScope.launch {
         planDao.update(plan)
         eventChannel.send(Event.NavigateBackWithResult(EDIT_PLAN_RESULT_OK))
     }
 
-    private fun createMoment(plan: Plan) = viewModelScope.launch {
+    private fun createPlan(plan: Plan) = viewModelScope.launch {
         planDao.insert(plan)
         eventChannel.send(Event.NavigateBackWithResult(ADD_PLAN_RESULT_OK))
+    }
+
+    private fun deletePlan(plan: Plan) = viewModelScope.launch {
+        planDao.delete(plan)
+        eventChannel.send(Event.NavigateBackWithResult(DELETE_PLAN_RESULT_OK))
     }
 
     sealed class Event {
