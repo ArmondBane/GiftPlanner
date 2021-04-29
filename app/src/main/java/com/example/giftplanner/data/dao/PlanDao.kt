@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface PlanDao {
 
-    @Query("SELECT * FROM plans ORDER BY date DESC")
+    @Query("SELECT * FROM plans ORDER BY date")
     fun getAllPlans(): Flow<List<Plan>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

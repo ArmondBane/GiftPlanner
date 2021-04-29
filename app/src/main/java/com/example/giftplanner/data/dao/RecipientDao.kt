@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 interface RecipientDao {
 
     @Query("SELECT * FROM recipients")
+    fun getAllRecipientsNames(): List<Recipient>
+
+    @Query("SELECT * FROM recipients")
     fun getAllRecipients(): Flow<List<Recipient>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

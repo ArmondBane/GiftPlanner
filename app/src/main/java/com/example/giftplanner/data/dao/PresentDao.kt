@@ -9,6 +9,9 @@ import kotlinx.coroutines.flow.Flow
 interface PresentDao {
 
     @Query("SELECT * FROM presents")
+    fun getAllPresentsNames(): List<Present>
+
+    @Query("SELECT * FROM presents")
     fun getAllPresents(): Flow<List<Present>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

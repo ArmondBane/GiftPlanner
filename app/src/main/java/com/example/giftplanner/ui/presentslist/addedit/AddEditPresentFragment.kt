@@ -18,9 +18,11 @@ import com.example.giftplanner.databinding.EditPresentFragmentBinding
 import com.example.giftplanner.ui.planslist.PlansListViewModel
 import com.example.giftplanner.util.exhaustive
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
+@AndroidEntryPoint
 class AddEditPresentFragment : Fragment(R.layout.edit_present_fragment) {
 
     private val viewModel: AddEditPresentViewModel by viewModels()

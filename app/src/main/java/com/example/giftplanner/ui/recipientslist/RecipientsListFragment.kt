@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.giftplanner.R
 import com.example.giftplanner.data.Entity.Recipient
 import com.example.giftplanner.databinding.RecipientsListFragmentBinding
@@ -53,10 +54,20 @@ class RecipientsListFragment
             viewModel.event.collect { event ->
                 when (event) {
                     is RecipientsListViewModel.Event.NavigateToAddRecipient -> {
-
+                        val action = RecipientsListFragmentDirections
+                                        .actionRecipientsListFragmentToAddEditRecipientFragment(
+                                                null,
+                                                "Добавление получателя"
+                                        )
+                        findNavController().navigate(action)
                     }
                     is RecipientsListViewModel.Event.NavigateToEditRecipient -> {
-
+                        val action = RecipientsListFragmentDirections
+                                        .actionRecipientsListFragmentToAddEditRecipientFragment(
+                                                event.recipient,
+                                                "Редактирование получателя"
+                                        )
+                        findNavController().navigate(action)
                     }
                     is RecipientsListViewModel.Event.ShowEditConfirmationMessage -> {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()

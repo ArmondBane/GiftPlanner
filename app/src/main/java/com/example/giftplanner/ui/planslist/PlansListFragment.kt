@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.example.giftplanner.R
 import com.example.giftplanner.data.Entity.Plan
 import com.example.giftplanner.databinding.PlansListFragmentBinding
@@ -53,10 +54,20 @@ class PlansListFragment
             viewModel.event.collect { event ->
                 when (event) {
                     is PlansListViewModel.Event.NavigateToAddPlan -> {
-
+                        val action = PlansListFragmentDirections
+                                        .actionPlansListFragmentToAddEditPlanFragment(
+                                                null,
+                                                "Добавление плана"
+                                        )
+                        findNavController().navigate(action)
                     }
                     is PlansListViewModel.Event.NavigateToEditPlan -> {
-
+                        val action = PlansListFragmentDirections
+                                        .actionPlansListFragmentToAddEditPlanFragment(
+                                                event.plan,
+                                                "Редактирование плана"
+                                        )
+                        findNavController().navigate(action)
                     }
                     is PlansListViewModel.Event.ShowEditConfirmationMessage -> {
                         Snackbar.make(requireView(), event.msg, Snackbar.LENGTH_SHORT).show()

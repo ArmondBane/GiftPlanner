@@ -20,14 +20,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Name"
-                android:textSize="24dp"
+                android:hint="Название"
+                android:textSize="24sp"
                 android:layout_marginBottom="20dp"/>
 
             <EditText
                 android:id="@+id/costView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Cost" />
+                android:text="Cost"
+                android:hint="Стоимость"
+                android:inputType="numberDecimal"/>
 
         </LinearLayout>
 

@@ -3,48 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/plansListFragment">
+    app:startDestination="@id/plansListFragmentDestination">
 
     <fragment
-        android:id="@+id/plansListFragment"
+        android:id="@+id/plansListFragmentDestination"
         android:name="com.example.giftplanner.ui.planslist.PlansListFragment"
-        android:label="PlansListFragment"
+        android:label="Планы"
         tools:layout="@layout/plans_list_fragment">
         <action
             android:id="@+id/action_plansListFragment_to_addEditPlanFragment"
-            app:destination="@id/addEditPlanFragment" />
+            app:destination="@id/addEditPlanFragmentDestination" />
     </fragment>
     <fragment
-        android:id="@+id/presentsListFragment"
+        android:id="@+id/presentsListFragmentDestination"
         android:name="com.example.giftplanner.ui.presentslist.PresentsListFragment"
-        android:label="PresentsListFragment"
+        android:label="Подарки"
         tools:layout="@layout/presents_list_fragment">
         <action
             android:id="@+id/action_presentsListFragment_to_addEditPresentFragment"
-            app:destination="@id/addEditPresentFragment" />
+            app:destination="@id/addEditPresentFragmentDestination" />
     </fragment>
     <fragment
-        android:id="@+id/recipientsListFragment"
+        android:id="@+id/recipientsListFragmentDestination"
         android:name="com.example.giftplanner.ui.recipientslist.RecipientsListFragment"
-        android:label="RecipientsListFragment"
+        android:label="Получатели"
         tools:layout="@layout/recipients_list_fragment">
         <action
             android:id="@+id/action_recipientsListFragment_to_addEditRecipientFragment"
-            app:destination="@id/addEditRecipientFragment" />
+            app:destination="@id/addEditRecipientFragmentDestination" />
     </fragment>
     <fragment
-        android:id="@+id/addEditPlanFragment"
+        android:id="@+id/addEditPlanFragmentDestination"
         android:name="com.example.giftplanner.ui.planslist.addedit.AddEditPlanFragment"
-        android:label="AddEditPlanFragment"
-        tools:layout="@layout/edit_plan_fragment"/>
+        android:label="{title}"
+        tools:layout="@layout/edit_plan_fragment">
+        <argument
+            android:name="plan"
+            app:argType="com.example.giftplanner.data.Entity.Plan"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
     <fragment
-        android:id="@+id/addEditPresentFragment"
+        android:id="@+id/addEditPresentFragmentDestination"
         android:name="com.example.giftplanner.ui.presentslist.addedit.AddEditPresentFragment"
-        android:label="AddEditPresentFragment"
-        tools:layout="@layout/edit_present_fragment"/>
+        android:label="{title}"
+        tools:layout="@layout/edit_present_fragment">
+        <argument
+            android:name="present"
+            app:argType="com.example.giftplanner.data.Entity.Present"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
     <fragment
-        android:id="@+id/addEditRecipientFragment"
+        android:id="@+id/addEditRecipientFragmentDestination"
         android:name="com.example.giftplanner.ui.recipientslist.addedit.AddEditRecipientFragment"
-        android:label="AddEditRecipientFragment"
-        tools:layout="@layout/edit_recipient_fragment"/>
+        android:label="{title}"
+        tools:layout="@layout/edit_recipient_fragment">
+        <argument
+            android:name="recipient"
+            app:argType="com.example.giftplanner.data.Entity.Recipient"
+            app:nullable="true"
+            android:defaultValue="@null" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -35,22 +35,22 @@ class AddEditPlanViewModel @ViewModelInject constructor(
     val isDeleteAllow: Boolean = plan != null
 
     @ExperimentalCoroutinesApi
-    val presentList = presentDao.getAllPresents().flatMapLatest { presentList ->
+    val presentList = presentDao.getAllPresentsNames().let { presentList ->
         val list: MutableList<String> = arrayListOf()
         presentList.forEach {
             list.add(it.name)
         }
-        return@flatMapLatest list.asFlow()
-    }.asLiveData().value as MutableList<*>
+        return@let list
+    }
 
     @ExperimentalCoroutinesApi
-    val recipientList = recipientDao.getAllRecipients().flatMapLatest { recipientList ->
+    val recipientList = recipientDao.getAllRecipientsNames().let { recipientList ->
         val list: MutableList<String> = arrayListOf()
         recipientList.forEach {
             list.add(it.name)
         }
-        return@flatMapLatest list.asFlow()
-    }.asLiveData().value as MutableList<*>
+        return@let list
+    }
 
     var holidayName: String = state.get<String>("holidayName") ?: plan?.holidayName ?: ""
         set(value) {

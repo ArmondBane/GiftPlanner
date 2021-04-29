@@ -22,6 +22,7 @@ import com.example.giftplanner.R
 import com.example.giftplanner.databinding.EditPlanFragmentBinding
 import com.example.giftplanner.util.exhaustive
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import java.text.SimpleDateFormat
@@ -30,6 +31,7 @@ import java.time.ZoneId
 import java.util.*
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
+@AndroidEntryPoint
 class AddEditPlanFragment: Fragment(R.layout.edit_plan_fragment) {
 
     private val viewModel: AddEditPlanViewModel by viewModels()
@@ -66,7 +68,7 @@ class AddEditPlanFragment: Fragment(R.layout.edit_plan_fragment) {
             presentSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             presentSpinner.apply {
                 adapter = presentSpinnerAdapter
-                setSelection(viewModel.presentId)
+                setSelection(viewModel.presentId-1)
             }
             presentSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -76,7 +78,7 @@ class AddEditPlanFragment: Fragment(R.layout.edit_plan_fragment) {
                     selectedId: Long
                 ) {
                     if(itemSelected != null) {
-                        viewModel.presentId = selectedItemPosition
+                        viewModel.presentId = selectedItemPosition+1
                     }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -88,9 +90,9 @@ class AddEditPlanFragment: Fragment(R.layout.edit_plan_fragment) {
                 viewModel.recipientList
             )
             recipientSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-            presentSpinner.apply {
+            recipientSpinner.apply {
                 adapter = recipientSpinnerAdapter
-                setSelection(viewModel.recipientId)
+                setSelection(viewModel.recipientId-1)
             }
             recipientSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -100,7 +102,7 @@ class AddEditPlanFragment: Fragment(R.layout.edit_plan_fragment) {
                     selectedId: Long
                 ) {
                     if(itemSelected != null) {
-                        viewModel.recipientId = selectedItemPosition
+                        viewModel.recipientId = selectedItemPosition+1
                     }
                 }
                 override fun onNothingSelected(parent: AdapterView<*>?) {}

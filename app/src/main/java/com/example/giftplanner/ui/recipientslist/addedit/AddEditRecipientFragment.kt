@@ -18,9 +18,11 @@ import com.example.giftplanner.databinding.EditRecipientFragmentBinding
 import com.example.giftplanner.ui.planslist.PlansListViewModel
 import com.example.giftplanner.util.exhaustive
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
 @Suppress("IMPLICIT_CAST_TO_ANY")
+@AndroidEntryPoint
 class AddEditRecipientFragment : Fragment(R.layout.edit_recipient_fragment) {
 
     private val viewModel: AddEditRecipientViewModel by viewModels()

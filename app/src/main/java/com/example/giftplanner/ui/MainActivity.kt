@@ -11,6 +11,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.giftplanner.R
+import com.example.giftplanner.util.exhaustive
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -29,12 +30,36 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.findNavController()
 
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.recipientListMenu, R.id.plansListMenu, R.id.presentsListMenu)
+            setOf(
+                R.id.recipientsListFragmentDestination,
+                R.id.plansListFragmentDestination,
+                R.id.presentsListFragmentDestination
+            )
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
 
         bottom_nav.setupWithNavController(navController)
+
+        bottom_nav.setOnNavigationItemSelectedListener {
+            when (it.itemId) {
+                R.id.plansListMenu -> {
+                    navController.navigate(R.id.plansListFragmentDestination)
+                    true
+                }
+                R.id.presentsListMenu -> {
+                    navController.navigate(R.id.presentsListFragmentDestination)
+                    true
+                }
+                R.id.recipientListMenu -> {
+                    navController.navigate(R.id.recipientsListFragmentDestination)
+                    true
+                }
+                else -> {true}
+            }.exhaustive
+        }
+
+        bottom_nav.selectedItemId = R.id.plansListMenu
     }
 
     override fun onSupportNavigateUp(): Boolean {

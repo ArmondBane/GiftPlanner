@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.giftplanner.data.Entity.Present
 import com.example.giftplanner.databinding.PresentsListFragmentBinding
+import com.example.giftplanner.databinding.PresentsListItemFragmentBinding
 import kotlinx.android.synthetic.main.presents_list_item_fragment.view.*
 
 class PresentsListAdapter(private val listener: OnItemClickListener)
@@ -24,7 +25,7 @@ class PresentsListAdapter(private val listener: OnItemClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = PresentsListFragmentBinding.inflate(
+        val binding = PresentsListItemFragmentBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -38,7 +39,7 @@ class PresentsListAdapter(private val listener: OnItemClickListener)
 
     override fun getItemCount() = list.size
 
-    inner class ViewHolder(private val binding: PresentsListFragmentBinding)
+    inner class ViewHolder(private val binding: PresentsListItemFragmentBinding)
         : RecyclerView.ViewHolder(binding.root) {
         init {
             binding.apply {
